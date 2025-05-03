@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomisoft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background: #f4f4f4;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
         }
 
         header {
-            background-color: #2b2b2b;
+            background: #1f1f1f;
             color: white;
-            padding: 20px;
             text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
         }
 
         .tabs {
             display: flex;
-            background: #333;
+            background: #292929;
+            justify-content: center;
         }
 
-            .tabs label {
-                flex: 1;
-                padding: 15px;
-                color: white;
-                text-align: center;
-                cursor: pointer;
-                background: #444;
-                border-right: 1px solid #555;
-                transition: background 0.3s;
-            }
+        .tabs label {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            color: white;
+            background: #383838;
+            transition: background 0.3s;
+        }
 
-                .tabs label:hover {
-                    background: #555;
-                }
+        .tabs label:hover {
+            background: #4b4b4b;
+        }
 
         input[type="radio"] {
             display: none;
@@ -44,12 +55,18 @@
 
         .content {
             display: none;
-            padding: 20px;
+            max-width: 1000px;
+            margin: 30px auto;
             background: white;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            margin: auto;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         input#tab1:checked ~ .tabs label[for="tab1"],
@@ -64,18 +81,17 @@
             display: block;
         }
 
-        /* Оригинальные стили статусов */
         .status {
             display: flex;
             align-items: center;
-            margin: 10px 0;
+            gap: 10px;
+            padding: 10px 0;
         }
 
         .lamp {
             width: 14px;
             height: 14px;
             border-radius: 50%;
-            margin-right: 10px;
         }
 
         .green {
@@ -86,196 +102,165 @@
             background: #e53935;
         }
 
-        a {
-            color: #4CAF50;
-            text-decoration: none;
+        .project-category {
+            margin-bottom: 40px;
         }
 
-            a:hover {
-                text-decoration: underline;
-            }
+        .project-category h3 {
+            border-left: 4px solid #4CAF50;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-item {
+            display: flex;
+            align-items: flex-start;
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .project-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .project-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-title {
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .project-description {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .project-link {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .project-link:hover {
+            background: #3d8b3d;
+        }
+
+        .virustotal-link, .file-info {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
 
         footer {
             text-align: center;
             padding: 20px;
             font-size: 14px;
-            color: #777;
+            color: #888;
+            margin-top: 40px;
         }
 
-        /* Новые стили для проектов */
-        .project-category {
-            margin-bottom: 30px;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .project-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            margin: 10px 0;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        }
-
-        .project-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 15px;
-        }
-
-        .project-info {
-            flex-grow: 1;
-        }
-
-        .project-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .project-description {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .project-link {
-            display: inline-block;
-            padding: 8px 15px;
-            background: #4CAF50;
-            color: white;
-            border-radius: 4px;
-            font-size: 14px;
-            margin-right: 10px;
-            margin-top: 5px;
-            transition: background 0.3s;
-        }
-
-            .project-link:hover {
-                background: #388E3C;
-                text-decoration: none;
+        @media (max-width: 768px) {
+            .project-item {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-        .download-section {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px dashed #ddd;
-        }
-
-        .virustotal-link {
-            font-size: 12px;
-            color: #666;
-            display: inline-block;
-            margin-top: 5px;
-        }
-
-        .file-info {
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
+            .project-icon {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
+<header>
+    <h1>Pomisoft</h1>
+    <p>Инструменты PomiSoft</p>
+</header>
 
-    <header>
-        <h1>Pomisoft</h1>
-        <p>Добро пожаловать!</p>
-    </header>
+<input type="radio" name="tabs" id="tab1" checked>
+<input type="radio" name="tabs" id="tab2">
+<input type="radio" name="tabs" id="tab3">
 
-    <input type="radio" name="tabs" id="tab1" checked>
-    <input type="radio" name="tabs" id="tab2">
-    <input type="radio" name="tabs" id="tab3">
+<div class="tabs">
+    <label for="tab1">Серверы</label>
+    <label for="tab2">Наши проекты</label>
+    <label for="tab3">Telegram</label>
+</div>
 
-    <div class="tabs">
-        <label for="tab1">Серверы</label>
-        <label for="tab2">Наши проекты</label>
-        <label for="tab3">Telegram</label>
-    </div>
+<div class="content content1">
+    <h2>Состояние серверов</h2>
+    <div class="status"><div class="lamp green"></div>Server #1 — Рабочий</div>
+</div>
 
-    <div class="content content1">
-        <h2>Состояние серверов</h2>
-        <div class="status"><div class="lamp green"></div>Server #1 — Рабочий</div>
-        <div class="status"><div class="lamp green"></div>Server #2 — Рабочий</div>
-    </div>
+<div class="content content2">
+    <h2>Наши проекты</h2>
 
-    <div class="content content2">
-        <h2>Наши проекты</h2>
-
-        <div class="project-category">
-            <h3>Приложения Windows</h3>
-            <div class="project-item">
-                <img src="img/windows-icon.png" alt="Windows" class="project-icon">
-                <div class="project-info">
-                    <div class="project-title">Pomisoft Notepad</div>
-                    <div class="project-description">
-                        Блокнот с большими возможностями: смена шрифта, изменение цвета текста,
-                        регулировка размера шрифта и другие полезные функции.
-                    </div>
-
-                    <div class="download-section">
-                        <!-- Кнопка скачивания -->
-                        <a href="downloads/PomiSoft NotePad Beta 4.0.exe" class="project-link" download="PomiSoft NotePad Beta 4.0.exe">
-                            Скачать (v1.0.0, 2.4 MB)
-                        </a>
-
-                        <!-- Ссылка на VirusTotal -->
-                        <div>
-                            <a href="https://www.virustotal.com/gui/file/47b62b5a5a9d77a5b34a0ca458fc0601b4f716cc99cf0da560a1e353e11305ca"
-                               target="_blank"
-                               class="virustotal-link">
-                                Проверить на VirusTotal
-                            </a>
-                            <div class="file-info">
-                                SHA-256: 47b62b5a5a9d77a5b34a0ca458fc0601b4f716cc99cf0da560a1e353e11305ca
-                            </div>
-                        </div>
-                    </div>
+    <div class="project-category">
+        <h3>Приложения Windows</h3>
+        <div class="project-item">
+            <img src="img/windows-icon.png" alt="Windows" class="project-icon">
+            <div class="project-info">
+                <div class="project-title">Pomisoft Notepad</div>
+                <div class="project-description">Блокнот с настройкой шрифта, цвета текста и другими удобствами.</div>
+                <a href="downloads/PomiSoft NotePad Beta 4.0.exe" class="project-link" download>Скачать (2.4 MB)</a>
+                <div class="virustotal-link">
+                    <a href="https://www.virustotal.com/gui/file/47b62b5a5a9d77a5b34a0ca458fc0601b4f716cc99cf0da560a1e353e11305ca" target="_blank">Проверить на VirusTotal</a>
                 </div>
-            </div>
-        </div>
-
-        <div class="project-category">
-            <h3>Telegram боты</h3>
-            <div class="project-item">
-                <img src="img/telegram-icon.png" alt="Telegram" class="project-icon">
-                <div class="project-info">
-                    <div class="project-title">Поиск музыки | Скачать видео ЮТ/ТТ</div>
-                    <div class="project-description">
-                        Бот для поиска и скачивания музыки из SoundCloud или Youtube.
-                        Также есть функция скачивания видео из TikTok или YouTube.
-                    </div>
-                    <a href="https://t.me/MuzikaAPI_bot" class="project-link">Открыть бота</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-category">
-            <h3>Android</h3>
-            <div class="project-item">
-                <img src="img/android-icon.png" alt="Android" class="project-icon">
-                <div class="project-info">
-                    <div class="project-title">Pomigram Android</div>
-                    <div class="project-description">
-                        Pomigram — это модифицированная версия AyuGram, созданная для тех,
-                        кто ценит удобство, стиль и расширенные возможности общения.
-                    </div>
-                    <a href="#" class="project-link">В разработке</a>
-                </div>
+                <div class="file-info">SHA-256: 47b62b5a5a9d77a5b34a0ca458fc0601b4f716cc99cf0da560a1e353e11305ca</div>
             </div>
         </div>
     </div>
 
-    <div class="content content3">
-        <h2>Telegram-канал</h2>
-        <p>Подписывайтесь на наш канал: <a href="https://t.me/Pomisoft" target="_blank">@Pomisoft</a></p>
+    <div class="project-category">
+        <h3>Telegram боты</h3>
+        <div class="project-item">
+            <img src="img/telegram-icon.png" alt="Telegram" class="project-icon">
+            <div class="project-info">
+                <div class="project-title">Музыка + YouTube/TikTok</div>
+                <div class="project-description">Поиск и скачивание музыки, видео с TikTok и YouTube прямо в Telegram.</div>
+                <a href="https://t.me/MuzikaAPI_bot" class="project-link">Открыть бота</a>
+            </div>
+        </div>
     </div>
 
-    <footer>
-        © 2025 Pomisoft. Все права защищены.
-    </footer>
+    <div class="project-category">
+        <h3>Android</h3>
+        <div class="project-item">
+            <img src="img/android-icon.png" alt="Android" class="project-icon">
+            <div class="project-info">
+                <div class="project-title">Pomigram Android</div>
+                <div class="project-description">Модифицированный Telegram-клиент на базе NekoGram с расширенным функционалом.</div>
+                <a href="#" class="project-link">В разработке</a>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="content content3">
+    <h2>Telegram-канал</h2>
+    <p>Подписывайтесь: <a href="https://t.me/Pomisoft" target="_blank">@Pomisoft</a></p>
+</div>
+
+<footer>
+    © 2025 Pomisoft. Все права защищены.
+</footer>
 </body>
 </html>
